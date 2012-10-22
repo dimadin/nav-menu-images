@@ -1,0 +1,56 @@
+# Translation of Nav Menu Images in Serbian
+# This file is distributed under the same license as the Nav Menu Images package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Nav Menu Images\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/nav-menu-images\n"
+"POT-Creation-Date: 2012-10-04 19:54:38+00:00\n"
+"PO-Revision-Date: 2012-10-08 21:16+0100\n"
+"Last-Translator: Milan Dinić <milan@srpski.biz>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.3\n"
+
+#: inc/admin.php:46
+msgid ""
+"You need to set an image as a featured image to be able to use it as an menu "
+"item image"
+msgstr ""
+"Потребно је да поставите слику као одабрану да бисте могли да је користите "
+"као слику ставке изборника"
+
+#: inc/walker.php:50
+msgid "Change menu item image"
+msgstr "Промени слику ставке изборника"
+
+#: inc/walker.php:53
+msgid "Upload menu item image"
+msgstr "Отпреми слику ставке изборника"
+
+#: nav-menu-images.php:165
+msgid "Donate"
+msgstr "Донирај"
+
+#. Plugin Name of the plugin/theme
+msgid "Nav Menu Images"
+msgstr "Слике у изборнику кретања"
+
+#. Plugin URI of the plugin/theme
+msgid "http://blog.milandinic.com/wordpress/plugins/nav-menu-images/"
+msgstr "http://blog.milandinic.com/wordpress/plugins/nav-menu-images/"
+
+#. Description of the plugin/theme
+msgid "Display image as a menu content."
+msgstr "Прикажите слику као садржај ставке изборника."
+
+#. Author of the plugin/theme
+msgid "Milan Dinić"
+msgstr "Милан Динић"
+
+#. Author URI of the plugin/theme
+msgid "http://blog.milandinic.com/"
+msgstr "http://www.milandinic.com/"
