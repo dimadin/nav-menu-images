@@ -3,7 +3,7 @@ Contributors: dimadin
 Donate link: http://blog.milandinic.com/donate/
 Tags: nav menu, menu, media, image
 Requires at least: 3.1
-Tested up to: 3.4.2
+Tested up to: 3.5
 Stable tag: 1.0
 
 Display image as a menu item content.
