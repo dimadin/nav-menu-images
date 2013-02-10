@@ -15,7 +15,7 @@
  * Description: Display image as a menu content.
  * Author:      Milan Dinić
  * Author URI:  http://blog.milandinic.com/
- * Version:     1.0
+ * Version:     2.0-beta-1
  * Text Domain: nmi
  * Domain Path: /languages/
  * License:     GPL
@@ -69,6 +69,7 @@ class Nav_Menu_Images {
 	 * @uses apply_filters() Calls 'nmi_filter_menu_item_content' to
 	 *                        overwrite menu item filter.
 	 * @uses add_filter() To hook filters.
+	 * @uses do_action() Calls 'nmi_init'.
 	 */
 	public function init() {
 		// Add thumbnail support to menus
@@ -92,6 +93,8 @@ class Nav_Menu_Images {
 		// Register plugins action links filter
 		add_filter( 'plugin_action_links_' .               $this->plugin_basename, array( $this, 'action_links' ) );
 		add_filter( 'network_admin_plugin_action_links_' . $this->plugin_basename, array( $this, 'action_links' ) );
+
+		do_action( 'nmi_init' );
 	}
 
 	/**
@@ -151,7 +154,7 @@ class Nav_Menu_Images {
 		$post_thumbnail = get_the_post_thumbnail( $post_id, 'thumb' );
 
 		// Full HTML
-		$return_html = '<a href="' . $upload_url . '" class="thickbox add_media">' . $post_thumbnail . '</a>';
+		$return_html = '<a href="' . $upload_url . '" data-id="' . $post_id . '" class="thickbox add_media">' . $post_thumbnail . '</a>';
 
 		die( $return_html );		
 	}

@@ -3,7 +3,7 @@ Contributors: dimadin
 Donate link: http://blog.milandinic.com/donate/
 Tags: nav menu, menu, media, image
 Requires at least: 3.1
-Tested up to: 3.5
+Tested up to: 3.5.1
 Stable tag: 1.0
 
 Display image as a menu item content.
@@ -34,3 +34,13 @@ There are no configuration options in this plugin.
 
 1. Link to upload form on nav menu item's edit screen
 2. Uploaded image on nav menu item's edit screen
+
+== Changelog ==
+
+= 2.0 =
+* Use new media views for WordPress 3.5+
+* Add more hooks for developers
+
+= 1.0 =
+* Released on 22nd October 2012
+* Initial release
