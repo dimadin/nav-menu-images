@@ -15,7 +15,7 @@
  * Description: Display image as a menu content.
  * Author:      Milan Dinić
  * Author URI:  http://blog.milandinic.com/
- * Version:     2.0
+ * Version:     3.0-beta-1
  * Text Domain: nmi
  * Domain Path: /languages/
  * License:     GPL
@@ -38,6 +38,15 @@ class Nav_Menu_Images {
 	 * @access protected
 	 */
 	protected $plugin_basename;
+
+	/**
+	 * Is last menu item of current page.
+	 *
+	 * @var $is_current_item
+	 * @since 3.0 
+	 * @access public
+	 */
+	public $is_current_item;
 
 	/**
 	 * Sets class properties.
@@ -182,7 +191,68 @@ class Nav_Menu_Images {
 	}
 
 	/**
+	 * Display a hover image for menu item image.
+	 *
+	 * @since 3.0
+	 * @access public
+	 *
+	 * Thanks {@link http://www.webmasterworld.com/forum21/6615.htm}
+	 *
+	 * @uses get_post_meta() To get item's hover & active images IDs.
+	 * @uses wp_get_attachment_image_src() To get hover image's data.
+	 * @uses apply_filters() Calls 'nmi_menu_item_hover' to
+	 *                        filter returned attributes.
+	 *
+	 * @param array $attr Image's attributes.
+	 * @param object $attachment Image's post object data.
+	 * @return array $attr New image's attributes.
+	 */
+	public function menu_item_hover( $attr, $attachment ) {
+		if ( ( $hover_id = get_post_meta( $attachment->post_parent, '_nmi_hover', true ) ) && ! ( $this->is_current_item && get_post_meta( $attachment->post_parent, '_nmi_active', true ) ) ) {
+			$image = wp_get_attachment_image_src( $hover_id, 'full', false );
+			$url = $image[0];
+			$src = $attr['src'];
+			$attr['onmouseover'] = 'this.src=\'' . $url . '\'';
+			$attr['onmouseout'] = 'this.src=\'' . $src . '\'';
+
+			$attr = apply_filters( 'nmi_menu_item_hover', $attr, $attachment );
+		}
+
+		return $attr;
+	}
+
+	/**
+	 * Display an active image for menu item.
+	 *
+	 * @since 3.0
+	 * @access public
+	 *
+	 * @uses get_post_meta() To get item's active image ID.
+	 * @uses wp_get_attachment_image_src() To get active image's data.
+	 * @uses apply_filters() Calls 'nmi_menu_item_active' to
+	 *                        filter returned attributes.
+	 *
+	 * @param array $attr Image's attributes.
+	 * @param object $attachment Image's post object data.
+	 * @return array $attr New image's attributes.
+	 */
+	public function menu_item_active( $attr, $attachment ) {
+		if ( $this->is_current_item && ( $active_id = get_post_meta( $attachment->post_parent, '_nmi_active', true ) ) ) {
+			$image = wp_get_attachment_image_src( $active_id, 'full', false );
+			$url = $image[0];
+			$attr['src'] = $url;
+
+			$attr = apply_filters( 'nmi_menu_item_active', $attr, $attachment );
+		}
+
+		return $attr;
+	}
+
+	/**
 	 * Register menu item content filter.
+	 *
+	 * Also check if menu item is of
+	 * currently displayed page.
 	 *
 	 * @since 1.0
 	 * @access public
@@ -190,14 +260,24 @@ class Nav_Menu_Images {
 	 * @uses has_post_thumbnail() To check if item has thumb.
 	 * @uses add_filter() To hook filter.
 	 *
-	 * @param array $item_classes Item's classes
+	 * @param array $item_classes Item's classes.
 	 * @param object $item Menu item data object.
 	 * @param object $args Item's arguments.
-	 * @return array $item_classes Item's classes
+	 * @return array $item_classes Item's classes.
 	 */
 	public function register_menu_item_filter( $item_classes, $item, $args ) {
-		if ( has_post_thumbnail( $item->ID ) )
-			add_filter( 'the_title', array( &$this, 'menu_item_content' ), 15, 2 );
+		if ( has_post_thumbnail( $item->ID ) ) {
+			// Register filters
+			add_filter( 'the_title',                          array( &$this, 'menu_item_content' ), 15, 2 );
+			add_filter( 'wp_get_attachment_image_attributes', array( &$this, 'menu_item_hover'   ), 15, 2 );
+			add_filter( 'wp_get_attachment_image_attributes', array( &$this, 'menu_item_active'  ), 15, 2 );
+
+			// Mark current item status
+			if ( in_array( 'current-menu-item', $item_classes ) )
+				$this->is_current_item = true;
+			else
+				$this->is_current_item = false;
+		}
 
 		return $item_classes;
 	}
@@ -215,7 +295,9 @@ class Nav_Menu_Images {
 	 * @return string $item_output Item's content
 	 */
 	public function deregister_menu_item_filter( $item_output, $item ) {
-		remove_filter( 'the_title', array( &$this, 'menu_item_content' ), 15, 3 );
+		remove_filter( 'the_title',                          array( &$this, 'menu_item_content' ), 15, 2 );
+		remove_filter( 'wp_get_attachment_image_attributes', array( &$this, 'menu_item_hover'   ), 15, 2 );
+		remove_filter( 'wp_get_attachment_image_attributes', array( &$this, 'menu_item_active'  ), 15, 2 );
 
 		return $item_output;
 	}

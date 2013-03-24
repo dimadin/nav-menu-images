@@ -28,13 +28,19 @@ class Nav_Menu_Images_Admin extends Nav_Menu_Images {
 	 */
 	public function __construct() {
 		// Register new AJAX thumbnail response
-		add_filter( 'admin_post_thumbnail_html', array( &$this, '_wp_post_thumbnail_html' ), 10, 2 );
+		add_filter( 'admin_post_thumbnail_html', array( &$this, '_wp_post_thumbnail_html'   ), 10, 2 );
 
 		// Register walker replacement
-		add_filter( 'wp_edit_nav_menu_walker',   array( &$this, 'filter_walker'           )        );
+		add_filter( 'wp_edit_nav_menu_walker',   array( &$this, 'filter_walker'             )        );
 
 		// Register enqueuing of scripts
-		add_action( 'admin_menu',                array( &$this, 'register_enqueuing'      )        );
+		add_action( 'admin_menu',                array( &$this, 'register_enqueuing'        )        );
+
+		// Register attachment fields display
+		add_filter( 'attachment_fields_to_edit', array( &$this, 'attachment_fields_to_edit' ), 10, 2 );
+
+		// Register attachment fields handling
+		add_filter( 'attachment_fields_to_save', array( &$this, 'attachment_fields_to_save' ), 10, 2 );
 	}
 
 	/**
@@ -112,7 +118,7 @@ class Nav_Menu_Images_Admin extends Nav_Menu_Images {
 	 * @since 2.0
 	 * @access public
 	 *
-	 * @uses get_post() TO get post's object.
+	 * @uses get_post() To get post's object.
 	 * @uses Nav_Menu_Images::load_textdomain() To load translations.
 	 * @uses admin_url() To get URL of uploader.
 	 * @uses esc_url() To escape URL.
@@ -176,5 +182,94 @@ class Nav_Menu_Images_Admin extends Nav_Menu_Images {
 
 		// Filter returned HTML output
 		return apply_filters( 'nmi_admin_post_thumbnail_html', $content, $post->ID );
+	}
+
+	/**
+	 * Display hover & active image checkboxes.
+	 *
+	 * @since 3.0
+	 * @access public
+	 *
+	 * @uses Nav_Menu_Images::load_textdomain() To load translations.
+	 * @uses get_post_meta() To get item's hover & active images IDs.
+	 * @uses checked() To set proper checkbox status.
+	 * @uses apply_filters() Calls 'nmi_attachment_fields_to_edit' to
+	 *                        overwrite returned form fields.
+	 *
+	 * @param array $form_fields Original attachment form fields.
+	 * @param object $post The post object data of attachment.
+	 * @return string New attachment form fields.
+	 */
+	function attachment_fields_to_edit( $form_fields, $post ) {
+		// Display only for images
+		if ( ! wp_attachment_is_image( $post->ID ) )
+			return $form_fields;
+
+		// Display only for nav menu items
+		if ( 'nav_menu_item' != get_post_type( $post->post_parent ) )
+			return $form_fields;
+
+		// Load translations
+		$this->load_textdomain();
+
+		// Add "hover" checkbox
+		$parent_hover_id = get_post_meta( $post->post_parent, '_nmi_hover', true );
+		$is_hover = ( $parent_hover_id == $post->ID ) ? true : false;
+		$is_hover_checked = checked( $is_hover, true, false );
+
+		$form_fields['nmihover'] = array(
+			'label'        => __( 'Used on hover?', 'nmi' ),
+			'input'        => 'html',
+			'html'         => "<input type='checkbox' class='nmi-hover-checkbox' {$is_hover_checked} name='attachments[{$post->ID}][nmihover]' id='attachments[{$post->ID}][nmihover]' data-parent='{$post->post_parent}' data-checked='{$is_hover}' />",
+			'value'        => $is_hover,
+			'helps'        => __( 'Should this image be used on hover', 'nmi' ),
+			'show_in_edit' => false
+		);
+
+		// Add "active" checkbox
+		$parent_active_id = get_post_meta( $post->post_parent, '_nmi_active', true );
+		$is_active = ( $parent_active_id == $post->ID ) ? true : false;
+		$is_active_checked = checked( $is_active, true, false );
+
+		$form_fields['nmiactive'] = array(
+			'label'        => __( 'Used when active?', 'nmi' ),
+			'input'        => 'html',
+			'html'         => "<input type='checkbox' class='nmi-active-checkbox' {$is_active_checked} name='attachments[{$post->ID}][nmiactive]' id='attachments[{$post->ID}][nmiactive]' data-parent='{$post->post_parent}' data-checked='{$is_active}' />",
+			'value'        => $is_active,
+			'helps'        => __( 'Should this image be used when menu item is active', 'nmi' ),
+			'show_in_edit' => false
+		);
+
+		// Filter returned HTML output
+		return apply_filters( 'nmi_attachment_fields_to_edit', $form_fields, $post );
+	}
+
+	/**
+	 * Save hover & active image checkboxes submissions.
+	 *
+	 * @since 3.0
+	 * @access public
+	 *
+	 * @uses update_post_meta() To save new item's hover or active images IDs.
+	 * @uses delete_post_meta() To delete old item's hover or active images IDs.
+	 *
+	 * @param object $post The post object data of attachment.
+	 * @param array $attachment Submitted data of attachment.
+	 * @return object $post The post object data of attachment.
+	 */
+	function attachment_fields_to_save( $post, $attachment ) {
+		// Save "hover" checkbox
+		if ( 'on' == $attachment['nmihover'] )
+			update_post_meta( $post['post_parent'], '_nmi_hover', $post['ID'] );
+		else
+			delete_post_meta( $post['post_parent'], '_nmi_hover', $post['ID'] );
+
+		// Save "active" checkbox
+		if ( 'on' == $attachment['nmiactive'] )
+			update_post_meta( $post['post_parent'], '_nmi_active', $post['ID'] );
+		else
+			delete_post_meta( $post['post_parent'], '_nmi_active', $post['ID'] );
+
+		return $post;  
 	}
 }

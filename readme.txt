@@ -37,6 +37,10 @@ There are no configuration options in this plugin.
 
 == Changelog ==
 
+= 3.0 =
+* Released on 
+* Add support for active and hover menu item images
+
 = 2.0 =
 * Use new media views for WordPress 3.5+
 * Add more hooks for developers
