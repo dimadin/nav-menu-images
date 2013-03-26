@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nav Menu Images\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/nav-menu-images\n"
-"POT-Creation-Date: 2013-02-10 14:31:46+00:00\n"
-"PO-Revision-Date: 2013-02-10 15:32+0100\n"
+"POT-Creation-Date: 2013-03-26 16:01:26+00:00\n"
+"PO-Revision-Date: 2013-03-26 17:04+0100\n"
 "Last-Translator: Milan Dinić <milan@srpski.biz>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.5.5\n"
 
-#: inc/admin.php:77
+#: inc/admin.php:83
 msgid ""
 "You need to set an image as a featured image to be able to use it as an menu "
 "item image"
@@ -23,19 +23,36 @@ msgstr ""
 "Потребно је да поставите слику као одабрану да бисте могли да је користите "
 "као слику ставке изборника"
 
-#: inc/admin.php:161 inc/walker.php:84
+#: inc/admin.php:167 inc/walker.php:84
 msgid "Upload menu item image"
 msgstr "Отпреми слику ставке изборника"
 
-#: inc/admin.php:168 inc/walker.php:75
+#: inc/admin.php:174 inc/walker.php:75
 msgid "Change menu item image"
 msgstr "Промени слику ставке изборника"
 
-#: inc/admin.php:170 inc/walker.php:80
+#: inc/admin.php:176 inc/walker.php:80
 msgid "Remove menu item image"
 msgstr "Уклони слику ставке изборника"
 
-#: nav-menu-images.php:238
+#: inc/admin.php:221
+msgid "Used on hover?"
+msgstr "Користи се приликом преласка?"
+
+#: inc/admin.php:225
+msgid "Should this image be used on hover"
+msgstr "Да ли би ова слика требало да се користи приликом преласка"
+
+#: inc/admin.php:235
+msgid "Used when active?"
+msgstr "Користи је када је активна?"
+
+#: inc/admin.php:239
+msgid "Should this image be used when menu item is active"
+msgstr ""
+"Да ли би ова слика требало да се користи када је ставка изборника активна"
+
+#: nav-menu-images.php:320
 msgid "Donate"
 msgstr "Донирај"
 
