@@ -135,19 +135,7 @@ class NMI_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
 			return;
 
 		// Prepare general settings
-		$settings = array(
-			'nonce'     => array(
-				'sendToEditor' => wp_create_nonce( 'media-send-to-editor' ),
-			),
-			'post'    => array(
-				'id' => 0,
-			),
-			'defaultProps' => array(
-				'link'  => get_option( 'image_default_link_type' ), // db default is 'file'
-				'align' => get_option( 'image_default_align' ), // empty default
-				'size'  => get_option( 'image_default_size' ),  // empty default
-			)
-		);
+		$settings = array();
 
 		// Prepare post specific settings
 		$post = null;

@@ -7,6 +7,12 @@
  * @subpackage Media View
  */
 jQuery(document).ready(function($){
+	// Workaround to make "Uploaded to this post" default
+	// Based on http://wordpress.stackexchange.com/a/76213
+	$(document).ajaxStop(function() {
+		$('.media-toolbar select.attachment-filters option[value="uploaded"]').attr( 'selected', true ).parent().trigger('change');
+	});
+
     // Prepare the variable that holds our custom media manager.
 	// Based on wp.media.featuredImage
 	wp.media.nmi = {
@@ -36,8 +42,8 @@ jQuery(document).ready(function($){
 		},
 
 		frame: function() {
-			if ( this._frame )
-				return this._frame;
+			/*if ( this._frame )
+				return this._frame;*/
 
 			this._frame = wp.media({
 				state: 'featured-image',
@@ -73,7 +79,7 @@ jQuery(document).ready(function($){
 				event.stopPropagation();
 
 				var nmi_clicked_item_id = $(this).data('id');
-				wp.media.view.settings = nmi_settings[nmi_clicked_item_id];
+				wp.media.view.settings = $.extend({}, wp.media.view.settings, nmi_settings[nmi_clicked_item_id]);
 
 				wp.media.nmi.frame().open();
 			// Update the featured image id when the 'remove' link is clicked.

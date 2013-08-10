@@ -88,7 +88,7 @@ class Nav_Menu_Images_Admin extends Nav_Menu_Images {
 		// For WP 3.5+, enqueue new script & dependicies
 		if ( version_compare( $wp_version, '3.5', '>=' ) ) {
 			wp_enqueue_media();
-			wp_enqueue_script( 'nmi-media-view', plugins_url( 'media-view.js', __FILE__ ), array( 'jquery', 'media-editor', 'media-views', 'post' ), '1.0', true );
+			wp_enqueue_script( 'nmi-media-view', plugins_url( 'media-view.js', __FILE__ ), array( 'jquery', 'media-editor', 'media-views', 'post' ), '1.1', true );
 		}
 
 		do_action( 'nmi_enqueue_scripts' );

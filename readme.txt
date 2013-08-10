@@ -41,6 +41,12 @@ There are no configuration options in this plugin.
 
 == Changelog ==
 
+= 3.1 =
+* Released on
+* Don't cache media frame and instead load new each time
+* Don't overwrite `wp.media.view.settings` but extend it, and only with post data
+* Force listing of images uploading only to current post 
+
 = 3.0 =
 * Released on 26th March 2013
 * Add support for active and hover menu item images
