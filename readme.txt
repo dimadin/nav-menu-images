@@ -3,8 +3,8 @@ Contributors: dimadin
 Donate link: http://blog.milandinic.com/donate/
 Tags: nav menu, menu, media, image
 Requires at least: 3.1
-Tested up to: 3.5.1
-Stable tag: 3.0
+Tested up to: 3.6
+Stable tag: 3.1
 
 Display image as a menu item content.
 
@@ -14,7 +14,7 @@ Display image as a menu item content.
 
 This plugin enables you to upload images for nav menu items on a menu edit screen. By default, those images will be displayed instead of text for respective menu items. Note that after upload, you should set an image as 'featured' to be able to display it.
 
-You can also set images that will be displayed only when you hover menu item, or when menu item is of currently displayed page. See screenshots to get an idea how to do this.
+You can also set images that will be displayed only when you hover menu item, or when menu item is of currently displayed page. [Read detailed instructions about using plugin](http://blog.milandinic.com/wordpress/plugins/nav-menu-images/#how-to-use).
 
 Developers can use many available filters to make their own way of displaying images, or even create a child class on top of base one. See source code for more ideas.
 
@@ -42,7 +42,7 @@ There are no configuration options in this plugin.
 == Changelog ==
 
 = 3.1 =
-* Released on
+* Released on 12th August 2013
 * Don't cache media frame and instead load new each time
 * Don't overwrite `wp.media.view.settings` but extend it, and only with post data
 * Force listing of images uploading only to current post 
