@@ -265,7 +265,7 @@ class Nav_Menu_Images {
 	 * @param object $args Item's arguments.
 	 * @return array $item_classes Item's classes.
 	 */
-	public function register_menu_item_filter( $item_classes, $item, $args ) {
+	public function register_menu_item_filter( $item_classes, $item, $args = array() ) {
 		if ( has_post_thumbnail( $item->ID ) ) {
 			// Register filters
 			add_filter( 'the_title',                          array( $this, 'menu_item_content' ), 15, 2 );
