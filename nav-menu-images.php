@@ -59,7 +59,7 @@ class Nav_Menu_Images {
 	 */
 	public function __construct() {
 		// Register init
-		add_action( 'init', array( &$this, 'init' ) );
+		add_action( 'init', array( $this, 'init' ) );
 
 		// Get a basename
 		$this->plugin_basename = plugin_basename( __FILE__ );
@@ -91,12 +91,12 @@ class Nav_Menu_Images {
 		}
 
 		// Register AJAX handler
-		add_action( 'wp_ajax_nmi_added_thumbnail', array( &$this, 'ajax_added_thumbnail' ) );
+		add_action( 'wp_ajax_nmi_added_thumbnail', array( $this, 'ajax_added_thumbnail' ) );
 
 		// Register menu item content filter if needed
 		if ( apply_filters( 'nmi_filter_menu_item_content', true ) ) {
-			add_filter( 'nav_menu_css_class',       array( &$this, 'register_menu_item_filter'   ), 15, 3 );
-			add_filter( 'walker_nav_menu_start_el', array( &$this, 'deregister_menu_item_filter' ), 15, 2 );
+			add_filter( 'nav_menu_css_class',       array( $this, 'register_menu_item_filter'   ), 15, 3 );
+			add_filter( 'walker_nav_menu_start_el', array( $this, 'deregister_menu_item_filter' ), 15, 2 );
 		}
 
 		// Register plugins action links filter
@@ -268,9 +268,9 @@ class Nav_Menu_Images {
 	public function register_menu_item_filter( $item_classes, $item, $args ) {
 		if ( has_post_thumbnail( $item->ID ) ) {
 			// Register filters
-			add_filter( 'the_title',                          array( &$this, 'menu_item_content' ), 15, 2 );
-			add_filter( 'wp_get_attachment_image_attributes', array( &$this, 'menu_item_hover'   ), 15, 2 );
-			add_filter( 'wp_get_attachment_image_attributes', array( &$this, 'menu_item_active'  ), 15, 2 );
+			add_filter( 'the_title',                          array( $this, 'menu_item_content' ), 15, 2 );
+			add_filter( 'wp_get_attachment_image_attributes', array( $this, 'menu_item_hover'   ), 15, 2 );
+			add_filter( 'wp_get_attachment_image_attributes', array( $this, 'menu_item_active'  ), 15, 2 );
 
 			// Mark current item status
 			if ( in_array( 'current-menu-item', $item_classes ) )
@@ -295,9 +295,9 @@ class Nav_Menu_Images {
 	 * @return string $item_output Item's content
 	 */
 	public function deregister_menu_item_filter( $item_output, $item ) {
-		remove_filter( 'the_title',                          array( &$this, 'menu_item_content' ), 15, 2 );
-		remove_filter( 'wp_get_attachment_image_attributes', array( &$this, 'menu_item_hover'   ), 15, 2 );
-		remove_filter( 'wp_get_attachment_image_attributes', array( &$this, 'menu_item_active'  ), 15, 2 );
+		remove_filter( 'the_title',                          array( $this, 'menu_item_content' ), 15, 2 );
+		remove_filter( 'wp_get_attachment_image_attributes', array( $this, 'menu_item_hover'   ), 15, 2 );
+		remove_filter( 'wp_get_attachment_image_attributes', array( $this, 'menu_item_active'  ), 15, 2 );
 
 		return $item_output;
 	}

@@ -28,19 +28,19 @@ class Nav_Menu_Images_Admin extends Nav_Menu_Images {
 	 */
 	public function __construct() {
 		// Register new AJAX thumbnail response
-		add_filter( 'admin_post_thumbnail_html', array( &$this, '_wp_post_thumbnail_html'   ), 10, 2 );
+		add_filter( 'admin_post_thumbnail_html', array( $this, '_wp_post_thumbnail_html'   ), 10, 2 );
 
 		// Register walker replacement
-		add_filter( 'wp_edit_nav_menu_walker',   array( &$this, 'filter_walker'             )        );
+		add_filter( 'wp_edit_nav_menu_walker',   array( $this, 'filter_walker'             )        );
 
 		// Register enqueuing of scripts
-		add_action( 'admin_menu',                array( &$this, 'register_enqueuing'        )        );
+		add_action( 'admin_menu',                array( $this, 'register_enqueuing'        )        );
 
 		// Register attachment fields display
-		add_filter( 'attachment_fields_to_edit', array( &$this, 'attachment_fields_to_edit' ), 10, 2 );
+		add_filter( 'attachment_fields_to_edit', array( $this, 'attachment_fields_to_edit' ), 10, 2 );
 
 		// Register attachment fields handling
-		add_filter( 'attachment_fields_to_save', array( &$this, 'attachment_fields_to_save' ), 10, 2 );
+		add_filter( 'attachment_fields_to_save', array( $this, 'attachment_fields_to_save' ), 10, 2 );
 	}
 
 	/**
@@ -52,7 +52,7 @@ class Nav_Menu_Images_Admin extends Nav_Menu_Images {
 	 * @uses add_action() To hook function.
 	 */
 	public function register_enqueuing() {
-		add_action( 'admin_print_scripts-nav-menus.php', array( &$this, 'enqueue_scripts' ) );
+		add_action( 'admin_print_scripts-nav-menus.php', array( $this, 'enqueue_scripts' ) );
 	}
 
 	/**
