@@ -43,13 +43,14 @@ class NMI_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
 	 * @param string $output Passed by reference. Used to append additional content.
 	 * @param object $item Menu item data object.
 	 * @param int $depth Depth of menu item. Used for padding.
-	 * @param object $args
+	 * @param array $args Not used.
+	 * @param int $id Not used.
 	 */
-	public function start_el( &$output, $item, $depth, $args ) {
+	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		global $wp_version;
 
 		// First, make item with standard class
-		parent::start_el( $output, $item, $depth, $args );
+		parent::start_el( $output, $item, $depth, $args, $id );
 
 		// Now add additional content
 		$item_id = $item->ID;
