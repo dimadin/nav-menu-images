@@ -277,6 +277,9 @@ class Nav_Menu_Images {
 				$this->is_current_item = true;
 			else
 				$this->is_current_item = false;
+
+			// Add 'has-image' class to the menu item
+			$item_classes[] = 'has-image';
 		}
 
 		return $item_classes;
