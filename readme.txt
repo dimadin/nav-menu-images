@@ -42,6 +42,7 @@ There are no configuration options in this plugin.
 == Changelog ==
 
 = 3.2 =
+* Released on 14 January 2014
 * Fixed PHP notice in NMI_Walker_Nav_Menu_Edit::start_el()
 * Don't pass class object by reference
 * Maybe fixed issues with "Missing argument 3 for Nav_Menu_Images::register_menu_item_filter()" errors
