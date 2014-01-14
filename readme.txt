@@ -4,7 +4,7 @@ Donate link: http://blog.milandinic.com/donate/
 Tags: nav menu, menu, media, image
 Requires at least: 3.1
 Tested up to: 3.8
-Stable tag: 3.1
+Stable tag: 3.2
 
 Display image as a menu item content.
 
