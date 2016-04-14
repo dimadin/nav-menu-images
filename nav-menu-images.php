@@ -100,8 +100,8 @@ class Nav_Menu_Images {
 		}
 
 		// Register plugins action links filter
-		add_filter( 'plugin_action_links_' .               $this->plugin_basename, array( $this, 'action_links' ) );
-		add_filter( 'network_admin_plugin_action_links_' . $this->plugin_basename, array( $this, 'action_links' ) );
+		add_filter( 'plugin_action_links',               array( $this, 'action_links' ), 10, 2 );
+		add_filter( 'network_admin_plugin_action_links', array( $this, 'action_links' ), 10, 2 );
 
 		do_action( 'nmi_init' );
 	}
@@ -313,10 +313,16 @@ class Nav_Menu_Images {
 	 *
 	 * @uses Nav_Menu_Images::load_textdomain() To load translations.
 	 *
-	 * @param array $link Plugin's action links.
-	 * @return array $link Plugin's action links.
+	 * @param array  $links       Existing plugin's action links.
+	 * @param string $plugin_file Path to the plugin file.
+	 * @return array $links New plugin's action links.
 	 */
-	public function action_links( $links ) {
+	public function action_links( $links, $plugin_file ) {
+		// Check if it is for this plugin
+		if ( $this->plugin_basename != $plugin_file ) {
+			return $links;
+		}
+
 		// Load translations
 		$this->load_textdomain();
 
