@@ -114,12 +114,11 @@ class Nav_Menu_Images {
 	 *
 	 * @uses is_textdomain_loaded() To check if translation is loaded.
 	 * @uses load_plugin_textdomain() To load translation file.
-	 * @uses plugin_basename() To get plugin's file name.
 	 */
 	public function load_textdomain() {
 		/* If translation isn't loaded, load it */
 		if ( ! is_textdomain_loaded( 'nav-menu-images' ) )
-			load_plugin_textdomain( 'nav-menu-images', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+			load_plugin_textdomain( 'nav-menu-images', false, dirname( $this->plugin_basename ) . '/languages' );
 	}
 
 	/**
