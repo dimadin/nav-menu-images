@@ -167,7 +167,7 @@ class Nav_Menu_Images_Admin extends Nav_Menu_Images {
 			$link = __( 'Upload menu item image', 'nmi' );
 
 		// Full link
-		$content = '<a href="' . $upload_url . '" data-id="' . $post->ID . '" class="thickbox add_media">' . $link . '</a>';
+		$content = '<div><a href="' . $upload_url . '" data-id="' . $post->ID . '" class="thickbox add_media">' . $link . '</a></div>';
 
 		// If item didn't have image, prepend actions links
 		if ( isset( $_REQUEST['thumb_was'] ) && -1 == $_REQUEST['thumb_was'] ) {
