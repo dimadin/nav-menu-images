@@ -327,6 +327,8 @@ class Nav_Menu_Images {
 		$this->load_textdomain();
 
 		$links['donate'] = '<a href="http://blog.milandinic.com/donate/">' . __( 'Donate', 'nav-menu-images' ) . '</a>';
+		$links['wpdev']  = '<a href="http://blog.milandinic.com/wordpress/custom-development/">' . __( 'WordPress Developer', 'nav-menu-images' ) . '</a>';
+
 		return $links;
 	}
 }
