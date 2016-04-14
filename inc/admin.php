@@ -259,13 +259,13 @@ class Nav_Menu_Images_Admin extends Nav_Menu_Images {
 	 */
 	function attachment_fields_to_save( $post, $attachment ) {
 		// Save "hover" checkbox
-		if ( 'on' == $attachment['nmihover'] )
+		if ( isset( $attachment['nmihover'] ) && 'on' == $attachment['nmihover'] )
 			update_post_meta( $post['post_parent'], '_nmi_hover', $post['ID'] );
 		else
 			delete_post_meta( $post['post_parent'], '_nmi_hover', $post['ID'] );
 
 		// Save "active" checkbox
-		if ( 'on' == $attachment['nmiactive'] )
+		if ( isset( $attachment['nmiactive'] ) && 'on' == $attachment['nmiactive'] )
 			update_post_meta( $post['post_parent'], '_nmi_active', $post['ID'] );
 		else
 			delete_post_meta( $post['post_parent'], '_nmi_active', $post['ID'] );
