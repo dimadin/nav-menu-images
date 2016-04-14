@@ -73,16 +73,16 @@ class NMI_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
 		if ( has_post_thumbnail( $item_id ) ) {
 			$post_thumbnail = get_the_post_thumbnail( $item_id, 'thumb' );
 			$output .= '<div class="nmi-current-image nmi-div" style="display: none;"><a href="' . $upload_url . '" data-id="' . $item_id . '" class="thickbox add_media">' . $post_thumbnail . '</a></div>';
-			$link_text = __( 'Change menu item image', 'nmi' );
+			$link_text = __( 'Change menu item image', 'nav-menu-images' );
 
 			// For WP 3.5+, add 'remove' action link
 			if ( version_compare( $wp_version, '3.5', '>=' ) ) {
 				$ajax_nonce = wp_create_nonce( 'set_post_thumbnail-' . $item_id );
-				$remove_link = ' | <a href="#" data-id="' . $item_id . '" class="nmi_remove" onclick="NMIRemoveThumbnail(\'' . $ajax_nonce . '\',' . $item_id . ');return false;">' . esc_html__( 'Remove menu item image', 'nmi' ) . '</a>';
+				$remove_link = ' | <a href="#" data-id="' . $item_id . '" class="nmi_remove" onclick="NMIRemoveThumbnail(\'' . $ajax_nonce . '\',' . $item_id . ');return false;">' . esc_html__( 'Remove menu item image', 'nav-menu-images' ) . '</a>';
 			}
 		} else {
 			$output .= '<div class="nmi-current-image nmi-div" style="display: none;"></div>';
-			$link_text = __( 'Upload menu item image', 'nmi' );
+			$link_text = __( 'Upload menu item image', 'nav-menu-images' );
 		}
 
 		// Append menu item upload link

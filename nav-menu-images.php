@@ -16,7 +16,7 @@
  * Author:      Milan Dinić
  * Author URI:  http://blog.milandinic.com/
  * Version:     3.2
- * Text Domain: nmi
+ * Text Domain: nav-menu-images
  * Domain Path: /languages/
  * License:     GPL
  */
@@ -118,8 +118,8 @@ class Nav_Menu_Images {
 	 */
 	public function load_textdomain() {
 		/* If translation isn't loaded, load it */
-		if ( ! is_textdomain_loaded( 'nmi' ) )
-			load_plugin_textdomain( 'nmi', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+		if ( ! is_textdomain_loaded( 'nav-menu-images' ) )
+			load_plugin_textdomain( 'nav-menu-images', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 	}
 
 	/**
@@ -320,7 +320,7 @@ class Nav_Menu_Images {
 		// Load translations
 		$this->load_textdomain();
 
-		$links['donate'] = '<a href="http://blog.milandinic.com/donate/">' . __( 'Donate', 'nmi' ) . '</a>';
+		$links['donate'] = '<a href="http://blog.milandinic.com/donate/">' . __( 'Donate', 'nav-menu-images' ) . '</a>';
 		return $links;
 	}
 }

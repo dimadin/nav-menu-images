@@ -80,7 +80,7 @@ class Nav_Menu_Images_Admin extends Nav_Menu_Images {
 		// Enqueue old script
 		wp_enqueue_script( 'nmi-scripts', plugins_url( 'nmi.js', __FILE__ ), array( 'media-upload', 'thickbox' ), '1', true );
 		wp_localize_script( 'nmi-scripts', 'nmi_vars', array(
-				'alert' => __( 'You need to set an image as a featured image to be able to use it as an menu item image', 'nmi' )
+				'alert' => __( 'You need to set an image as a featured image to be able to use it as an menu item image', 'nav-menu-images' )
 			)
 		);
 		add_thickbox();
@@ -164,16 +164,16 @@ class Nav_Menu_Images_Admin extends Nav_Menu_Images {
 		if ( has_post_thumbnail( $post->ID ) )
 			$link = get_the_post_thumbnail( $post->ID, 'thumb' );
 		else
-			$link = __( 'Upload menu item image', 'nmi' );
+			$link = __( 'Upload menu item image', 'nav-menu-images' );
 
 		// Full link
 		$content = '<div><a href="' . $upload_url . '" data-id="' . $post->ID . '" class="thickbox add_media">' . $link . '</a></div>';
 
 		// If item didn't have image, prepend actions links
 		if ( isset( $_REQUEST['thumb_was'] ) && -1 == $_REQUEST['thumb_was'] ) {
-			$link_text = __( 'Change menu item image', 'nmi' );
+			$link_text = __( 'Change menu item image', 'nav-menu-images' );
 			$ajax_nonce = wp_create_nonce( 'set_post_thumbnail-' . $post->ID );
-			$remove_link = ' | <a href="#" data-id="' . $post->ID . '" class="nmi_remove" onclick="NMIRemoveThumbnail(\'' . $ajax_nonce . '\',' . $post->ID . ');return false;">' . esc_html__( 'Remove menu item image', 'nmi' ) . '</a>';
+			$remove_link = ' | <a href="#" data-id="' . $post->ID . '" class="nmi_remove" onclick="NMIRemoveThumbnail(\'' . $ajax_nonce . '\',' . $post->ID . ');return false;">' . esc_html__( 'Remove menu item image', 'nav-menu-images' ) . '</a>';
 
 			$actions = '<a href="' . $upload_url . '" data-id="' . $post->ID . '" class="thickbox add_media">' . $link_text . '</a>' . $remove_link;
 
@@ -218,11 +218,11 @@ class Nav_Menu_Images_Admin extends Nav_Menu_Images {
 		$is_hover_checked = checked( $is_hover, true, false );
 
 		$form_fields['nmihover'] = array(
-			'label'        => __( 'Used on hover?', 'nmi' ),
+			'label'        => __( 'Used on hover?', 'nav-menu-images' ),
 			'input'        => 'html',
 			'html'         => "<input type='checkbox' class='nmi-hover-checkbox' {$is_hover_checked} name='attachments[{$post->ID}][nmihover]' id='attachments[{$post->ID}][nmihover]' data-parent='{$post->post_parent}' data-checked='{$is_hover}' />",
 			'value'        => $is_hover,
-			'helps'        => __( 'Should this image be used on hover', 'nmi' ),
+			'helps'        => __( 'Should this image be used on hover', 'nav-menu-images' ),
 			'show_in_edit' => false
 		);
 
@@ -232,11 +232,11 @@ class Nav_Menu_Images_Admin extends Nav_Menu_Images {
 		$is_active_checked = checked( $is_active, true, false );
 
 		$form_fields['nmiactive'] = array(
-			'label'        => __( 'Used when active?', 'nmi' ),
+			'label'        => __( 'Used when active?', 'nav-menu-images' ),
 			'input'        => 'html',
 			'html'         => "<input type='checkbox' class='nmi-active-checkbox' {$is_active_checked} name='attachments[{$post->ID}][nmiactive]' id='attachments[{$post->ID}][nmiactive]' data-parent='{$post->post_parent}' data-checked='{$is_active}' />",
 			'value'        => $is_active,
-			'helps'        => __( 'Should this image be used when menu item is active', 'nmi' ),
+			'helps'        => __( 'Should this image be used when menu item is active', 'nav-menu-images' ),
 			'show_in_edit' => false
 		);
 
