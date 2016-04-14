@@ -308,6 +308,7 @@ class Nav_Menu_Images {
 	 * Add action links to plugins page.
 	 *
 	 * @since 1.0
+	 * @since 3.3 Added second parameter.
 	 * @access public
 	 *
 	 * @uses Nav_Menu_Images::load_textdomain() To load translations.
