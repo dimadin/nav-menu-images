@@ -1,0 +1,22 @@
+{
+	"name": "dimadin/nav-menu-images",
+	"description": "Display image as a menu content.",
+	"keywords": ["menu"],
+	"type": "wordpress-plugin",
+	"homepage": "http://blog.milandinic.com/wordpress/plugins/nav-menu-images/",
+	"license": "GPL-2.0+",
+	"authors": [
+		{
+			"name": "Milan Dinić",
+			"email": "milan@srpski.biz",
+			"homepage": "http://blog.milandinic.com/"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/dimadin/nav-menu-images/issues",
+		"source": "https://github.com/dimadin/nav-menu-images"
+	},
+	"require": {
+		"composer/installers": "~1.0"
+	}
+}
