@@ -15,7 +15,7 @@
  * Description: Display image as a menu content.
  * Author:      Milan Dinić
  * Author URI:  http://blog.milandinic.com/
- * Version:     3.2
+ * Version:     3.3
  * Text Domain: nav-menu-images
  * Domain Path: /languages/
  * License:     GPL
