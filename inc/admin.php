@@ -258,6 +258,11 @@ class Nav_Menu_Images_Admin extends Nav_Menu_Images {
 	 * @return object $post The post object data of attachment.
 	 */
 	function attachment_fields_to_save( $post, $attachment ) {
+		// Check that there is a full post object
+		if ( ! isset( $post['post_parent'] ) ) {
+			return $post;
+		}
+
 		// Save "hover" checkbox
 		if ( isset( $attachment['nmihover'] ) && 'on' == $attachment['nmihover'] )
 			update_post_meta( $post['post_parent'], '_nmi_hover', $post['ID'] );
