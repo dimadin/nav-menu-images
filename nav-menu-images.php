@@ -248,6 +248,28 @@ class Nav_Menu_Images {
 	}
 
 	/**
+	 * Remove 'srcset' and 'sizes' attributes.
+	 *
+	 * @since 3.4
+	 * @access public
+	 *
+	 * @param array $attr Image's attributes.
+	 * @param object $attachment Image's post object data.
+	 * @return array $attr New image's attributes.
+	 */
+	public function remove_responsive( $attr, $attachment ) {
+		if ( isset( $attr['srcset'] ) ) {
+			unset( $attr['srcset'] );
+		}
+
+		if ( isset( $attr['sizes'] ) ) {
+			unset( $attr['sizes'] );
+		}
+
+		return $attr;
+	}
+
+	/**
 	 * Register menu item content filter.
 	 *
 	 * Also check if menu item is of
@@ -270,6 +292,7 @@ class Nav_Menu_Images {
 			add_filter( 'the_title',                          array( $this, 'menu_item_content' ), 15, 2 );
 			add_filter( 'wp_get_attachment_image_attributes', array( $this, 'menu_item_hover'   ), 15, 2 );
 			add_filter( 'wp_get_attachment_image_attributes', array( $this, 'menu_item_active'  ), 15, 2 );
+			add_filter( 'wp_get_attachment_image_attributes', array( $this, 'remove_responsive' ), 15, 2 );
 
 			// Mark current item status
 			if ( in_array( 'current-menu-item', $item_classes ) )
@@ -300,6 +323,7 @@ class Nav_Menu_Images {
 		remove_filter( 'the_title',                          array( $this, 'menu_item_content' ), 15, 2 );
 		remove_filter( 'wp_get_attachment_image_attributes', array( $this, 'menu_item_hover'   ), 15, 2 );
 		remove_filter( 'wp_get_attachment_image_attributes', array( $this, 'menu_item_active'  ), 15, 2 );
+		remove_filter( 'wp_get_attachment_image_attributes', array( $this, 'remove_responsive' ), 15, 2 );
 
 		return $item_output;
 	}
